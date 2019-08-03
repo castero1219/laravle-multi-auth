@@ -197,3 +197,18 @@ return [
     'same_site' => null,
 
 ];
+
+// 配列を一度保持するように書き換えます。
+$conf = [
+    // 元々記載のあった配列の中身
+    ];
+
+    // 管理画面のセッションクッキーを変更する
+    $uri = isset($SERVER['REQUEST_URI']) ? $SERVER['REQUEST_URI'] : '';
+    if (strpos($uri, '/admin/') === 0 || $uri === '/admin') {
+        $conf['cookie'] = env(
+            'SESSIONCOOKIE_ADMIN',
+            str_slug(env('APPNAME', 'laravel'), '_').'_admin_session'
+        );
+    }
+    return $conf;
