@@ -12,7 +12,7 @@
                     <div class="alert alert-success">{{session("success")}}</div>
 
                     @endif
-                    <form action="{{route('user.update')}}" method="POST">
+                    <form action="{{route('user.update')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <ul>
                             <li>
@@ -23,10 +23,13 @@
                                 <label for="">email</label>
                                 <input type="email" value="{{$user->email}}"readonly name="email">
                             </li>
-                            {{-- <li>
+                            <li>
                                 <label for="">プロフィール画像</label>
-                                <input type="email" value="{{$user->email}}"readonly>
-                            </li> --}}
+                                @if($user->profile_image)
+                                    <img src="/storage/{{$user->profile_image}}" alt="">
+                                @endif
+                                <input type="file" value="" name="profile_image">
+                            </li>
                         </ul>
                         <input type="submit" value="プロフィール編集を実行する" class="btn btn-primary">
                     </form>
