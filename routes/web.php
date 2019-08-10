@@ -21,6 +21,8 @@ Auth::routes();
 Route::group(['prefix' => 'user', 'middleware' => 'auth:user'], function(){
 
     Route::get('edit', 'UserController@edit')->name('user.edit');
+
+
     Route::post('update', 'UserController@update')->name('user.update');
 
 });
